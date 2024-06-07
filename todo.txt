@@ -1,0 +1,22 @@
+✔ user/category controllers/models/routes
+✔ isCreatorOrAdmin
+
+✔ put/delete card 
+✔ put/delete deck (_id? token?)
+✔ put/delete category
+✔ put user
+
+KIV:
+isLoggedIn: addCard, addDeck
+isAdmin: add/update/deleteCategory, getUsers, updateUser
+isCreatorOrAdmin: updateCard, deleteCard, updateDeck, deleteDeck
+
+todo: 
+Routes: When a user requests their decks or cards, you filter the results by req.user._id, which is set in the isUserValid middleware.
+〇 recheck getCards/Decks controller methods (e.g. .skip, .limit) once frontend done
+
+potential errors:
+〇 what if URL proxied for ✔card/〇deck edit/delete?
+〇 what if card deleted from deck that has it?
+(none issue) what if deck deleted with cards in it?
+✔ what if category deleted with cards/decks in it?
