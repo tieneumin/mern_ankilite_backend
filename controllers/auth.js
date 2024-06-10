@@ -25,7 +25,6 @@ const generateUserToken = (user) => {
 
 // POST /auth/signup
 const signUpUser = async (username, email, password) => {
-  console.log();
   // 1. validate input
   const error = [];
 
