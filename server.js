@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-// const { MONGODB_URL } = require("./config");
+const { MONGODB_URL } = require("./config");
 
 const app = express();
 
@@ -25,8 +25,8 @@ app.use(corsHandler);
 // MongoDB connection
 mongoose
   .connect(
-    // MONGODB_URL + "flashcard"
-    "mongodb://127.0.0.1:27017/flashcard"
+    MONGODB_URL + "flashcard"
+    // "mongodb://127.0.0.1:27017/flashcard"
   )
   .then(() => {
     console.log("MongoDB connected.");

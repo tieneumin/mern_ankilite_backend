@@ -3,7 +3,7 @@ const { getUserByUsername, getUserByEmail } = require("./auth");
 
 // GET /users
 const getUsers = async () => {
-  return await User.find().sort({ createdAt: 1 }); // oldest to newest
+  return await User.find().sort({ createdAt: 1 }); // sort by oldest to newest
 };
 
 // GET /user

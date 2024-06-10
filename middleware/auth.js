@@ -48,25 +48,18 @@ const isCreatorOrAdmin = async (req, res, next) => {
     const card = await getCard(id);
     const deck = await getDeck(id);
 
-    console.log(user);
-
     if (
-      // ? prevents error if null._id.toString()
-      card?.creator.toString() === user?._id.toString() ||
-      deck?.creator.toString() === user?._id.toString() ||
+      card?.creator.toString() === user?._id.toString() || // ? prevents error when null._id.toString()
+      deck?.creator._id.toString() === user?._id.toString() ||
       user?.role === "admin"
     ) {
       req.user = user;
       next();
     } else {
-      res
-        .status(403)
-        .send({ message: "You are not authorized to perform this action." });
+      res.status(403).send({ message: "Unauthorized action." });
     }
   } catch (error) {
-    res
-      .status(403)
-      .send({ message: "You are not authorized to perform this action." });
+    res.status(403).send({ message: "Unauthorized action." });
   }
 };
 

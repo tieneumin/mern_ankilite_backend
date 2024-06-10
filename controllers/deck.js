@@ -1,41 +1,21 @@
 const Deck = require("../models/deck");
 
 // GET /decks
-const getDecks = async (category, creator = "", page = 1, perPage = 9) => {
-  // originally: category, page = 1, perPage = 100
+const getDecks = async (category) => {
   let filters = {};
   if (category) filters.category = category;
-  if (creator !== "") filters.creator = creator;
 
-  // console.log(filters);
-
-  // // sort list by latest added
-  // let latestAdded = { _id: -1 };
-
-  /* 
-      Pagination
-      .skip() // skips given amount
-      .limit() // limits items returned
-    */
   return await Deck.find(filters)
-    .populate("category") // model prop
-    .populate({
-      path: "creator",
-      select: "username",
-    })
-    .sort({ _id: -1 }); // sort by latest added
-  // .skip((page - 1) * perPage)
-  // .limit(perPage);
+    .populate("category")
+    .populate({ path: "creator", select: "username" })
+    .sort({ _id: -1 });
 };
 
 // GET /decks/:id
 const getDeck = async (id) => {
   return await Deck.findById(id)
-    .populate("category") // model prop
-    .populate({
-      path: "creator",
-      select: "username",
-    })
+    .populate("category")
+    .populate({ path: "creator", select: "username" })
     .populate("cards");
 };
 

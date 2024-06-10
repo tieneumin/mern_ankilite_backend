@@ -25,10 +25,11 @@ const generateUserToken = (user) => {
 
 // POST /auth/signup
 const signUpUser = async (username, email, password) => {
+  console.log();
   // 1. validate input
   const error = [];
 
-  const usernameTaken = await getUserByUsername({ username });
+  const usernameTaken = await getUserByUsername(username);
   if (usernameTaken) error.push("Username has already been taken.");
 
   const emailInUse = await getUserByEmail(email);
@@ -36,6 +37,9 @@ const signUpUser = async (username, email, password) => {
 
   if (error.length > 0) throw new Error(error);
 
+  console.log(username);
+  console.log(email);
+  console.log(password);
   // 2. create new user
   const newUser = new User({
     username,
@@ -44,15 +48,11 @@ const signUpUser = async (username, email, password) => {
   });
   await newUser.save();
 
-  // 3. generate JWT
-  const token = generateUserToken(newUser);
-
   return {
     _id: newUser._id,
     username,
     email,
     role: newUser.role,
-    token,
   };
 };
 

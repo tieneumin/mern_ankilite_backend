@@ -28,9 +28,8 @@ const updateCategory = async (id, name) => {
 const deleteCategory = async (id) => {
   const cards = await Card.find({ category: id });
   const decks = await Deck.find({ category: id });
-  if (cards.length > 0 || decks.length > 0) {
+  if (cards.length > 0 || decks.length > 0)
     throw new Error("Category is currently in use.");
-  }
   return await Category.findByIdAndDelete(id);
 };
 
