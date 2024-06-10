@@ -37,9 +37,6 @@ const signUpUser = async (username, email, password) => {
 
   if (error.length > 0) throw new Error(error);
 
-  console.log(username);
-  console.log(email);
-  console.log(password);
   // 2. create new user
   const newUser = new User({
     username,
